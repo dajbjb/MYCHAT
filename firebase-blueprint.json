@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user profile in the 3D chat app.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "avatarColor": { "type": "string", "description": "Hex color for the 3D avatar" },
+        "lastActive": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["online", "offline"] }
+      },
+      "required": ["uid", "displayName"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "A chat message sent in a 3D room.",
+      "type": "object",
+      "properties": {
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "text": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "position": {
+          "type": "object",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "z": { "type": "number" }
+          }
+        }
+      },
+      "required": ["senderId", "text", "timestamp"]
+    },
+    "Room": {
+      "title": "Room",
+      "description": "A 3D chat room.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "environmentType": { "type": "string", "enum": ["space", "forest", "minimal"] }
+      },
+      "required": ["name"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/rooms/{roomId}": {
+      "schema": "Room",
+      "description": "Chat room metadata"
+    },
+    "/rooms/{roomId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages within a specific room"
+    }
+  }
+}

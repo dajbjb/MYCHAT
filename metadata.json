@@ -1,0 +1,8 @@
+{
+  "name": "DimensionChat 3D",
+  "description": "A futuristic 3D chat experience with real-time interaction, customizable avatars, and AI-powered conversation tools.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
